@@ -181,7 +181,7 @@ function closeNav() {
 }
 function placeOrder(){
 
-    fetch("http://localhost:8080/orders/place", {
+    fetch("/customer/checkout", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

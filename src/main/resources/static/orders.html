@@ -144,7 +144,7 @@ if(!userEmail){
     window.location.href = "login.html";
 }
 
-fetch("http://localhost:8080/orders/history/" + userEmail)
+fetch("https://Abby-s-kitchen.onrender.com/orders/history/" + userEmail, { credentials: "include" })
 .then(res => res.json())
 .then(data => {
 
