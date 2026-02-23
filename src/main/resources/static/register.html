@@ -12,6 +12,7 @@
             color: white;
         }
         /* Hamburger Button */
+        
 .menu-btn {
     font-size: 28px;
     cursor: pointer;
@@ -60,18 +61,18 @@
     </style>
 </head>
 <body>
+<!-- Hamburger -->
 <span class="menu-btn" onclick="openNav()">☰</span>
 
+<!-- Sidebar -->
 <div id="mySidenav" class="sidenav">
     <span class="close-btn" onclick="closeNav()">&times;</span>
-
     <a href="index.html">🏠 Home</a>
     <a href="login.html">🔐 Login / Register</a>
     <a href="menu.html">🍽 Menu</a>
     <a href="orders.html">📦 Order History</a>
     <a href="reviews.html">⭐ Reviews</a>
 </div>
-
 <h2>Register</h2>
 
 <input type="text" id="name" placeholder="Name"><br>
@@ -84,7 +85,7 @@
 
 <script>
 function register() {
-    fetch("http://localhost:8080/customer/register", {
+    fetch("/customer/register", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
