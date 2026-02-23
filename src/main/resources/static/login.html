@@ -132,6 +132,7 @@ input {
     🚪 Logout
 </button>
 
+
 <!-- Sidebar -->
 <div id="mySidenav" class="sidenav">
     <span class="close-btn" onclick="closeNav()">&times;</span>
@@ -146,6 +147,7 @@ input {
 <div class="login-wrapper">
     <div class="login-container">
         <h2>Login</h2>
+        <a href="register.html" style="color:white">Register</a>
 
         <input type="email" id="email" placeholder="Enter Email">
         <input type="password" id="password" placeholder="Enter Password">
@@ -179,7 +181,7 @@ function loginUser() {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
-    fetch("http://localhost:8080/customer/login", {
+    fetch("/customer/login", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
