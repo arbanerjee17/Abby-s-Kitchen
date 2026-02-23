@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register</title>
+    <style>
+        body { font-family: Arial; text-align: center; margin-top: 100px; }
+        input { padding: 10px; margin: 10px; width: 250px; }
+        button { padding: 10px 20px; cursor: pointer; }
+        body{
+            background: linear-gradient(to right, #667eea, #764ba2);
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+        /* Hamburger Button */
+.menu-btn {
+    font-size: 28px;
+    cursor: pointer;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1001;
+    color: white ; 
+}
+
+/* Side Navigation */
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.4s;
+    padding-top: 60px;
+    z-index: 1000;
+}
+
+.sidenav a {
+    padding: 15px 25px;
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    background-color: #ff4b7d;
+}
+
+.sidenav .close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+    </style>
+</head>
+<body>
+<span class="menu-btn" onclick="openNav()">☰</span>
+
+<div id="mySidenav" class="sidenav">
+    <span class="close-btn" onclick="closeNav()">&times;</span>
+
+    <a href="index.html">🏠 Home</a>
+    <a href="login.html">🔐 Login / Register</a>
+    <a href="menu.html">🍽 Menu</a>
+    <a href="orders.html">📦 Order History</a>
+    <a href="reviews.html">⭐ Reviews</a>
+</div>
+
+<h2>Register</h2>
+
+<input type="text" id="name" placeholder="Name"><br>
+<input type="email" id="email" placeholder="Email"><br>
+<input type="password" id="password" placeholder="Password"><br>
+
+<button onclick="register()">Register</button>
+
+<p id="message"></p>
+
+<script>
+function register() {
+    fetch("http://localhost:8080/customer/register", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            name: document.getElementById("name").value,
+            email: document.getElementById("email").value,
+            password: document.getElementById("password").value
+        })
+    })
+    .then(response => response.text())
+    .then(data => {
+        document.getElementById("message").innerText = data;
+    });
+}
+function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+}
+
+
+</script>
+
+</body>
+</html>

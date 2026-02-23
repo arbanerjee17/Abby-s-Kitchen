@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Cart</title>
+
+<style>
+body {
+    font-family:'Segoe UI',sans-serif;
+    background: linear-gradient(to right, #ff9966, #ff5e62);
+    padding:40px;
+}
+/* Hamburger Button */
+.menu-btn {
+    font-size: 28px;
+    cursor: pointer;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1001;
+    color: white;
+}
+
+/* Side Navigation */
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.4s;
+    padding-top: 60px;
+    z-index: 1000;
+}
+
+.sidenav a {
+    padding: 15px 25px;
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    background-color: #ff4b7d;
+}
+
+.sidenav .close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+h1 {
+    text-align:center;
+}
+
+.item {
+    background:white;
+    padding:15px;
+    margin:15px 0;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-radius:8px;
+}
+
+button {
+    padding:5px 10px;
+    border:none;
+    background:red;
+    color:white;
+    cursor:pointer;
+}
+</style>
+</head>
+<body>
+<span class="menu-btn" onclick="openNav()">☰</span>
+
+<div id="mySidenav" class="sidenav">
+    <span class="close-btn" onclick="closeNav()">&times;</span>
+
+    <a href="index.html">🏠 Home</a>
+    <a href="login.html">🔐 Login / Register</a>
+    <a href="menu.html">🍽 Menu</a>
+    <a href="orders.html">📦 Order History</a>
+    <a href="reviews.html">⭐ Reviews</a>
+</div>
+
+<h1>Your Cart 🛒</h1>
+
+<div id="cart"></div>
+
+<h2 id="total"></h2>
+
+<script>
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let cartDiv = document.getElementById("cart");
+let total = 0;
+
+function increase(index) {
+    cart[index].quantity += 1;
+    localStorage.setItem("cart", JSON.stringify(cart));
+    location.reload();
+}
+
+function decrease(index) {
+    if(cart[index].quantity > 1){
+        cart[index].quantity -= 1;
+    } else {
+        cart.splice(index,1);
+    }
+    localStorage.setItem("cart", JSON.stringify(cart));
+    location.reload();
+}
+
+function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+}
+
+
+function proceedToCheckout() {
+
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+
+    if(isLoggedIn !== "true") {
+
+        alert("Please login / register to place order.");
+
+        // Save redirect destination
+        localStorage.setItem("redirectAfterLogin", "checkout.html");
+
+        window.location.href = "login.html";
+
+    } else {
+        window.location.href = "checkout.html";
+    }
+}
+cart.forEach((item,index) => {
+
+    total += item.price * item.quantity;
+
+    cartDiv.innerHTML += `
+        <div class="item">
+            <span>
+                ${item.name} - ₹${item.price} × ${item.quantity}
+            </span>
+            <div>
+                <button onclick="decrease(${index})">-</button>
+                <button onclick="increase(${index})">+</button>
+            </div>
+        </div>
+    `;
+});
+
+document.getElementById("total").innerText = "Total: ₹" + total;
+
+</script>
+<br><br>
+<button onclick="proceedToCheckout()">
+    Proceed to Checkout
+</button>
+
+
+</body>
+</html>

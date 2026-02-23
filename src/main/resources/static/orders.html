@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>My Orders</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #ff9966, #ff5e62);
+            min-height: 100vh;
+            padding: 40px 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 600px;
+        }
+/* Hamburger Button */
+.menu-btn {
+    font-size: 28px;
+    cursor: pointer;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1001;
+    color: white;
+}
+
+/* Side Navigation */
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.4s;
+    padding-top: 60px;
+    z-index: 1000;
+}
+
+.sidenav a {
+    padding: 15px 25px;
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    background-color: #ff4b7d;
+}
+
+.sidenav .close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+        h2 {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .order-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0px 8px 20px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+        }
+
+        .order-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 8px 0;
+        }
+
+        .total {
+            font-weight: bold;
+            font-size: 17px;
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+            margin-top: 10px;
+        }
+
+        .empty {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0px 8px 20px rgba(0,0,0,0.2);
+        }
+
+        button {
+            display: block;
+            margin: 20px auto 0 auto;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            background: #ff5e62;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #ff3b3f;
+        }
+    </style>
+</head>
+<body>
+<span class="menu-btn" onclick="openNav()">☰</span>
+
+<div id="mySidenav" class="sidenav">
+    <span class="close-btn" onclick="closeNav()">&times;</span>
+
+    <a href="index.html">🏠 Home</a>
+    <a href="login.html">🔐 Login / Register</a>
+    <a href="menu.html">🍽 Menu</a>
+    <a href="orders.html">📦 Order History</a>
+    <a href="reviews.html">⭐ Reviews</a>
+</div>
+
+<div class="container">
+    <h2>My Orders 📦</h2>
+    <div id="orders"></div>
+    <button onclick="goToMenu()">Back to Menu</button>
+</div>
+
+<script>
+
+let userEmail = localStorage.getItem("userEmail");
+
+if(!userEmail){
+    alert("Please login first!");
+    window.location.href = "login.html";
+}
+
+fetch("http://localhost:8080/orders/history/" + userEmail)
+.then(res => res.json())
+.then(data => {
+
+    const div = document.getElementById("orders");
+
+    if(data.length === 0){
+        div.innerHTML = `
+            <div class="empty">
+                <h3>No Orders Yet 😔</h3>
+                <p>Start ordering delicious food!</p>
+            </div>
+        `;
+        return;
+    }
+
+    data.forEach(order => {
+
+        div.innerHTML += `
+            <div class="order-card">
+                <div class="order-row">
+                    <span>Order ID</span>
+                    <span>#${order.id}</span>
+                </div>
+                <div class="order-row">
+                    <span>Amount</span>
+                    <span>₹${order.amount}</span>
+                </div>
+                <div class="order-row">
+                    <span>GST</span>
+                    <span>₹${order.gst}</span>
+                </div>
+                <div class="order-row">
+                    <span>Delivery</span>
+                    <span>₹${order.deliveryCharge}</span>
+                </div>
+                <div class="order-row total">
+                    <span>Total</span>
+                    <span>₹${order.totalAmount}</span>
+                </div>
+            </div>
+        `;
+    });
+
+});
+
+function goToMenu(){
+    window.location.href = "menu.html";
+}
+function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+}
+</script>
+
+</body>
+</html>

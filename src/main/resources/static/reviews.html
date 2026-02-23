@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Customer Reviews</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg,#1f2235,#2f3e50);
+    color: white;
+}
+
+/* Hamburger */
+.menu-btn {
+    font-size: 28px;
+    cursor: pointer;
+    position: fixed;
+    top: 20px;
+    left: 25px;
+    z-index: 1001;
+}
+
+/* Sidebar */
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #111;
+    overflow-x: hidden;
+    transition: 0.4s;
+    padding-top: 60px;
+    z-index: 1000;
+}
+
+.sidenav a {
+    padding: 15px 25px;
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    display: block;
+}
+
+.sidenav a:hover {
+    background-color: #ff4b7d;
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+/* Title */
+h1 {
+    text-align: center;
+    padding-top: 100px;
+    font-size: 42px;
+}
+
+/* Review Form */
+.review-form {
+    max-width: 500px;
+    margin: 40px auto;
+    background: #3c4659;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+}
+
+.review-form input,
+.review-form textarea,
+.review-form select {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 10px;
+}
+
+.review-form button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    background: #ff4b7d;
+    color: white;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.review-form button:hover {
+    background: #ff2f65;
+}
+
+/* Review Cards */
+.review-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    padding: 40px 60px 80px 60px;
+}
+
+.review-card {
+    background: #3c4659;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+.review-card h3 {
+    margin-bottom: 10px;
+}
+
+.stars {
+    color: gold;
+    margin-bottom: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<span class="menu-btn" onclick="openNav()">☰</span>
+
+<div id="mySidenav" class="sidenav">
+    <span class="close-btn" onclick="closeNav()">&times;</span>
+    <a href="index.html">🏠 Home</a>
+    <a href="login.html">🔐 Login</a>
+    <a href="menu.html">🍽 Menu</a>
+    <a href="orders.html">📦 Orders</a>
+    <a href="reviews.html">⭐ Reviews</a>
+</div>
+
+<h1>⭐ Customer Reviews</h1>
+
+<div class="review-form">
+    <input type="text" id="name" placeholder="Your Name">
+    
+    <select id="rating">
+        <option value="">Select Rating</option>
+        <option value="5">★★★★★ (5)</option>
+        <option value="4">★★★★☆ (4)</option>
+        <option value="3">★★★☆☆ (3)</option>
+        <option value="2">★★☆☆☆ (2)</option>
+        <option value="1">★☆☆☆☆ (1)</option>
+    </select>
+
+    <textarea id="comment" rows="4" placeholder="Write your review..."></textarea>
+
+    <button onclick="addReview()">Submit Review</button>
+</div>
+
+<div class="review-container" id="reviews"></div>
+
+<script>
+
+function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+}
+
+function addReview() {
+    const name = document.getElementById("name").value;
+    const rating = document.getElementById("rating").value;
+    const comment = document.getElementById("comment").value;
+
+    if (!name || !rating || !comment) {
+        alert("Please fill all fields!");
+        return;
+    }
+
+    const review = { name, rating, comment };
+
+    let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+    reviews.push(review);
+    localStorage.setItem("reviews", JSON.stringify(reviews));
+
+    displayReviews();
+    document.getElementById("name").value = "";
+    document.getElementById("rating").value = "";
+    document.getElementById("comment").value = "";
+}
+
+function displayReviews() {
+    const reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+    const container = document.getElementById("reviews");
+    container.innerHTML = "";
+
+    reviews.reverse().forEach(r => {
+        container.innerHTML += `
+            <div class="review-card">
+                <h3>${r.name}</h3>
+                <div class="stars">${"★".repeat(r.rating)}${"☆".repeat(5 - r.rating)}</div>
+                <p>${r.comment}</p>
+            </div>
+        `;
+    });
+}
+
+displayReviews();
+
+</script>
+
+</body>
+</html>
