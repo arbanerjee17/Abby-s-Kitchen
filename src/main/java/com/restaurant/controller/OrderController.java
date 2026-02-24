@@ -26,4 +26,9 @@ public class OrderController {
     public List<Order> getOrderHistory(@PathVariable String email) {
         return orderRepository.findByCustomerEmail(email);
     }
+
+    @GetMapping("/all")
+    public List<Order> getAllOrders() {
+        return orderRepository.findAll();
+    }
 }
