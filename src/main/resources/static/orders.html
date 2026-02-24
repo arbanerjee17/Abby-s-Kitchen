@@ -18,51 +18,50 @@
         .container {
             width: 600px;
         }
-/* Hamburger Button */
-.menu-btn {
-    font-size: 28px;
-    cursor: pointer;
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    z-index: 1001;
-    color: white;
-}
 
-/* Side Navigation */
-.sidenav {
-    height: 100%;
-    width: 0;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: #111;
-    overflow-x: hidden;
-    transition: 0.4s;
-    padding-top: 60px;
-    z-index: 1000;
-}
+        .menu-btn {
+            font-size: 28px;
+            cursor: pointer;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            color: white;
+        }
 
-.sidenav a {
-    padding: 15px 25px;
-    text-decoration: none;
-    font-size: 18px;
-    color: white;
-    display: block;
-    transition: 0.3s;
-}
+        .sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.4s;
+            padding-top: 60px;
+            z-index: 1000;
+        }
 
-.sidenav a:hover {
-    background-color: #ff4b7d;
-}
+        .sidenav a {
+            padding: 15px 25px;
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            display: block;
+            transition: 0.3s;
+        }
 
-.sidenav .close-btn {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    font-size: 30px;
-    cursor: pointer;
-}
+        .sidenav a:hover {
+            background-color: #ff4b7d;
+        }
+
+        .sidenav .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 30px;
+            cursor: pointer;
+        }
 
         h2 {
             text-align: center;
@@ -117,11 +116,11 @@
     </style>
 </head>
 <body>
+
 <span class="menu-btn" onclick="openNav()">☰</span>
 
 <div id="mySidenav" class="sidenav">
     <span class="close-btn" onclick="closeNav()">&times;</span>
-
     <a href="index.html">🏠 Home</a>
     <a href="login.html">🔐 Login / Register</a>
     <a href="menu.html">🍽 Menu</a>
@@ -144,13 +143,20 @@ if(!userEmail){
     window.location.href = "login.html";
 }
 
-fetch("https://abby-s-kitchen.onrender.com/orders/history" + userEmail, { credentials: "include" })
-.then(res => res.json())
+// ✅ FIXED URL (added / before email)
+fetch(`https://abby-s-kitchen.onrender.com/orders/history/${userEmail}`)
+.then(res => {
+    if(!res.ok){
+        throw new Error("Failed to fetch orders");
+    }
+    return res.json();
+})
 .then(data => {
 
     const div = document.getElementById("orders");
+    div.innerHTML = "";
 
-    if(data.length === 0){
+    if(!Array.isArray(data) || data.length === 0){
         div.innerHTML = `
             <div class="empty">
                 <h3>No Orders Yet 😔</h3>
@@ -188,11 +194,20 @@ fetch("https://abby-s-kitchen.onrender.com/orders/history" + userEmail, { creden
         `;
     });
 
+})
+.catch(err => {
+    console.error("Error loading orders:", err);
+    document.getElementById("orders").innerHTML = `
+        <div class="empty">
+            <h3>Could not load orders ⚠️</h3>
+        </div>
+    `;
 });
 
 function goToMenu(){
     window.location.href = "menu.html";
 }
+
 function openNav() {
     document.getElementById("mySidenav").style.width = "250px";
 }
@@ -200,6 +215,7 @@ function openNav() {
 function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
 }
+
 </script>
 
 </body>
