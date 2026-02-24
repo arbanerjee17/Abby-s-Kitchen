@@ -181,7 +181,7 @@ function closeNav() {
 }
 function placeOrder(){
 
-    fetch("/customer/checkout", {
+    fetch("https://abby-s-kitchen.onrender.com/orders/place", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
