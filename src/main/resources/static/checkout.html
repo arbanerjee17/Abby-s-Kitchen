@@ -189,9 +189,9 @@ function placeOrder(){
     body: JSON.stringify({
         amount: subtotal,
         gst: gst,
-        deliveryCharge: deliveryCharge,
+        deliveryCharge: delivery,   // ✅ FIXED
         totalAmount: total,
-        customerEmail: localStorage.getItem("customerEmail")
+        customerEmail: userEmail    // also use this (you already defined it)
     })
     })
     .then(res => res.json())
