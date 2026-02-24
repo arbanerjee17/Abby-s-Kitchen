@@ -181,18 +181,18 @@ function closeNav() {
 }
 function placeOrder(){
 
-    fetch("https://abby-s-kitchen.onrender.com/orders/place", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            amount: subtotal,
-            gst: gst,
-            deliveryCharge: delivery,
-            totalAmount: total,
-            customerEmail: userEmail
-        })
+    fetch("/orders/place", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        amount: subtotal,
+        gst: gst,
+        deliveryCharge: deliveryCharge,
+        totalAmount: total,
+        customerEmail: localStorage.getItem("customerEmail")
+    })
     })
     .then(res => res.json())
     .then(data => {
