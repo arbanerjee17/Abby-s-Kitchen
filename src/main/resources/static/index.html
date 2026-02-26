@@ -144,6 +144,30 @@ body {
 .hero button:hover{
     transform:scale(1.1);
 }
+
+.typewriter {
+    font-size: 24px;
+    margin: 15px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 2px solid white;
+    width: 0;
+    animation: typing 4s steps(40, end) forwards,
+               blink 0.8s infinite;
+}
+
+/* Typing animation */
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+/* Cursor blinking */
+@keyframes blink {
+    0% { border-color: white; }
+    50% { border-color: transparent; }
+    100% { border-color: white; }
+}
 /* Scroll Down Button (Like Screenshot) */
 .scroll-down {
     color: white;
@@ -223,7 +247,11 @@ section{
     background:#fff0f5;
     color:#333;
 }
-
+.dishes h2{
+    font-size:40px;
+    margin-bottom:20px;
+    animation:fadeIn 1.5s ease;
+}
 .dish-grid{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
@@ -313,6 +341,9 @@ footer{
 <div class="hero">
     <div class="hero-content">
         <h1>Welcome to Abby's Kitchen</h1>
+        <h3 class="typewriter">
+            If You Wanna Heal, Lets Have a Meal
+        </h3>
         <p>Fresh • Delicious • Delivered Fast</p>
 
         <button onclick="window.location.href='menu.html'">
@@ -357,18 +388,24 @@ footer{
 <section class="dishes">
     <h2>Popular Dishes</h2>
     <div class="dish-grid">
-        <div class="dish-card">
-            <img src="IMAGES/PIZZA2.jpg">
-            <h3>Cheesy Pizza</h3>
-        </div>
-        <div class="dish-card">
-            <img src="https://images.unsplash.com/photo-1550547660-d9450f859349">
-            <h3>Chicken Burger</h3>
-        </div>
-        <div class="dish-card">
-            <img src="https://images.unsplash.com/photo-1525755662778-989d0524087e">
-            <h3>Creamy Pasta</h3>
-        </div>
+        <a href="menu.html" class="dish-link">
+            <div class="dish-card">
+                <img src="IMAGES/PIZZA2.jpg">
+                <h3>Cheesy Pizza</h3>
+            </div>
+        </a>
+        <a href="menu.html" class="dish-link">
+            <div class="dish-card">
+                <img src="https://images.unsplash.com/photo-1550547660-d9450f859349">
+                <h3>Chicken Burger</h3>
+            </div>
+        </a>
+        <a href="menu.html" class="dish-link">
+            <div class="dish-card">
+                <img src="https://images.unsplash.com/photo-1525755662778-989d0524087e">
+                <h3>Creamy Pasta</h3>
+            </div>
+        </a>
     </div>
 </section>
 
