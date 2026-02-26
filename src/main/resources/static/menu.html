@@ -12,6 +12,9 @@ body {
     background: linear-gradient(135deg,#1f2235,#2f3e50);
     color: white;
 }
+html{
+    scroll-behavior: smooth;
+}
 
 /* Hamburger */
 .menu-btn {
@@ -87,6 +90,26 @@ h1 {
     padding: 0 60px 80px 60px;
 }
 
+.category-buttons{
+    text-align:center;
+    margin-bottom:50px;
+}
+
+.category-buttons a{
+    display:inline-block;
+    margin:10px;
+    padding:10px 20px;
+    background:#ff4b7d;
+    color:white;
+    text-decoration:none;
+    border-radius:25px;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.category-buttons a:hover{
+    background:#ff2f65;
+}
 /* Card */
 .card {
     background: #3c4659;
@@ -198,48 +221,62 @@ h1 {
 </button>
 
 <h1>🍽 Our Delicious Menu</h1>
+<div class="category-buttons">
+    <a href="#veg-starters">Veg Starters</a>
+    <a href="#nonveg-starters">Non Veg Starters</a>
+    <a href="#veg-items">Veg Items</a>
+    <a href="#nonveg-items">Non Veg Items</a>
+    <a href="#desserts">Desserts</a>
+</div>
+<div id="veg-starters" class="menu-container">
 
-<div class="menu-container">
+    <h2 style="text-align:center; margin-bottom:40px; font-size:32px;">
+        🥗 Veg Starters
+    </h2>
 
+    <!-- Paapri Chaat -->
     <div class="card">
-        <img src="IMAGES/PIZZA.jpg">
+        <img src="IMAGES/paaprii.jpg">
         <div class="card-body">
-            <h3>🍕 Farmhouse Pizza</h3>
-            <p class="price">₹349</p>
-            <button class="btn" onclick="addStaticItem('Farmhouse Pizza',349)">
+            <h3>🍕 Paapri Chaat</h3>
+            <p class="price">₹69</p>
+            <button class="btn" onclick="addStaticItem('Paapri Chaat',69)">
                 Add to Cart
             </button>
         </div>
     </div>
 
-    <div class="card">
-        <img src="IMAGES/BURGER.jpg">
-        <div class="card-body">
-            <h3>🍔 Double Chicken Burger</h3>
-            <p class="price">₹249</p>
-            <button class="btn" onclick="addStaticItem('Double Chicken Burger',249)">
-                Add to Cart
-            </button>
-        </div>
-    </div>
-
+    <!-- Italian Creamy Pasta -->
     <div class="card">
         <img src="IMAGES/PASTA.jpg">
         <div class="card-body">
             <h3>🍝 Italian Creamy Pasta</h3>
-            <p class="price">₹279</p>
-            <button class="btn" onclick="addStaticItem('Italian Creamy Pasta',279)">
+            <p class="price">₹79</p>
+            <button class="btn" onclick="addStaticItem('Italian Creamy Pasta',79)">
                 Add to Cart
             </button>
         </div>
     </div>
 
+    <!-- Pani Puri -->
     <div class="card">
-        <img src="IMAGES/PIZZA2.jpg">
+        <img src="IMAGES/panipuri.jpg">
         <div class="card-body">
-            <h3>🧀 Cheese Pizza</h3>
-            <p class="price">₹299</p>
-            <button class="btn" onclick="addStaticItem('Cheese Pizza',299)">
+            <h3>🍕 Pani Puri (6 Pieces)</h3>
+            <p class="price">₹59</p>
+            <button class="btn" onclick="addStaticItem('Pani Puri',59)">
+                Add to Cart
+            </button>
+        </div>
+    </div>
+
+    <!-- Crispy Chilli Baby Corn -->
+    <div class="card">
+        <img src="IMAGES/corn.jpg">
+        <div class="card-body">
+            <h3>🍕 Crispy Chilli Baby Corn</h3>
+            <p class="price">₹149</p>
+            <button class="btn" onclick="addStaticItem('Crispy Chilli Baby Corn',149)">
                 Add to Cart
             </button>
         </div>
@@ -247,6 +284,170 @@ h1 {
 
 </div>
 
+<div id="nonveg-starters" class="menu-container">
+
+    <h2 style="text-align:center; margin-bottom:40px; font-size:32px;">
+        🍗 Non Veg Starters
+    </h2>
+
+    <!-- Double Chicken Burger -->
+    <div class="card">
+        <img src="IMAGES/BURGER.jpg">
+        <div class="card-body">
+            <h3>🍔 Double Chicken Burger</h3>
+            <p class="price">₹149</p>
+            <button class="btn" onclick="addStaticItem('Double Chicken Burger',249)">
+                Add to Cart
+            </button>
+        </div>
+    </div>
+
+</div>
+
+<div id="veg-items" class="menu-container">
+
+    <h2 style="text-align:center; margin-bottom:40px; font-size:32px;">
+        🥘 Veg Items
+    </h2>
+
+    <!-- Cheese Pizza -->
+    <div class="card">
+        <img src="IMAGES/PIZZA2.jpg">
+        <div class="card-body">
+            <h3>🧀 Cheese Pizza</h3>
+            <p class="price">₹149</p>
+            <button class="btn" onclick="addStaticItem('Cheese Pizza',299)">
+                Add to Cart
+            </button>
+        </div>
+    </div>
+
+    <!-- Farmhouse Pizza -->
+    <div class="card">
+        <img src="IMAGES/PIZZA.jpg">
+        <div class="card-body">
+            <h3>🍕 Farmhouse Pizza</h3>
+            <p class="price">₹199</p>
+            <button class="btn" onclick="addStaticItem('Farmhouse Pizza',349)">
+                Add to Cart
+            </button>
+        </div>
+    </div>
+
+    <!-- Butter Naan -->
+    <div class="card">
+        <img src="IMAGES/naan.jpg">
+        <div class="card-body">
+            <h3>🥖 Butter Naan</h3>
+            <p class="price">₹49</p>
+            <button class="btn" onclick="addStaticItem('Butter Naan',49)">
+                Add to Cart
+            </button>
+        </div>
+    </div>
+
+    <!-- Pulow -->
+    <div class="card">
+        <img src="IMAGES/pulow.webp">
+        <div class="card-body">
+            <h3>🍚 Pulow</h3>
+            <p class="price">₹169</p>
+            <button class="btn" onclick="addStaticItem('Pulow',169)">
+                Add to Cart
+            </button>
+        </div>
+    </div>
+
+    <!-- Palak Paneer -->
+    <div class="card">
+        <img src="IMAGES/palak.jpg">
+        <div class="card-body">
+            <h3>🥬 Palak Paneer</h3>
+            <p class="price">₹139</p>
+            <button class="btn" onclick="addStaticItem('Paalak Paneer',139)">
+                Add to Cart
+            </button>
+        </div>
+    </div>
+
+    <!-- Paneer Butter Masala -->
+    <div class="card">
+        <img src="IMAGES/paneer.jpg">
+        <div class="card-body">
+            <h3>🧈 Paneer Butter Masala</h3>
+            <p class="price">₹149</p>
+            <button class="btn" onclick="addStaticItem('Paneer Butter Masala',129)">
+                Add to Cart
+            </button>
+        </div>
+    </div>
+
+    <!-- Khichri -->
+    <div class="card">
+        <img src="IMAGES/khichri.jpg">
+        <div class="card-body">
+            <h3>🍲 Khichri</h3>
+            <p class="price">₹59</p>
+            <button class="btn" onclick="addStaticItem('Khichri',59)">
+                Add to Cart
+            </button>
+        </div>
+    </div>
+
+</div>
+
+<div id="nonveg-items" class="menu-container">
+
+    <h2 style="text-align:center; margin-bottom:40px; font-size:32px;">
+        🍖 Non Veg Items
+    </h2>
+
+    <!-- Chicken Tikka Butter Masala -->
+    <div class="card">
+        <img src="IMAGES/tikka.jpeg">
+        <div class="card-body">
+            <h3>🍗 Chicken Tikka Butter Masala</h3>
+            <p class="price">₹259</p>
+            <button class="btn" onclick="addStaticItem('Chicken Tikka Butter Masala',259)">
+                Add to Cart
+            </button>
+        </div>
+    </div>
+
+    <!-- Chilli Chicken -->
+    <div class="card">
+        <img src="IMAGES/chilli.jpg">
+        <div class="card-body">
+            <h3>🌶 Chilli Chicken</h3>
+            <p class="price">₹149</p>
+            <button class="btn" onclick="addStaticItem('Chilli Chicken',349)">
+                Add to Cart
+            </button>
+        </div>
+    </div>
+
+</div>
+
+<div id="desserts" class="menu-container">
+
+    <h2 style="text-align:center; margin-bottom:40px; font-size:32px;">
+        🍨 Desserts
+    </h2>
+
+    <!-- Gulaab Jamun -->
+    <div class="card">
+        <img src="IMAGES/gulab.webp">
+        <div class="card-body">
+            <h3>🍮 Gulaab Jamun (2 Pieces)</h3>
+            <p class="price">₹49</p>
+            <button class="btn" onclick="addStaticItem('Gulaab Jamun',49)">
+                Add to Cart
+            </button>
+        </div>
+    </div>
+
+</div>
+    
 <script>
 function openNav() {
     document.getElementById("mySidenav").style.width = "250px";

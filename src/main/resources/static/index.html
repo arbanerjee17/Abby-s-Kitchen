@@ -195,6 +195,33 @@ body {
     100% { transform: translateY(0); }
 }
 
+/* Why Choose Header Layout */
+.why-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.food-icons {
+    display: flex;
+    gap: 15px;
+}
+
+.food-icons img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid white;
+    transition: 0.3s;
+}
+
+.food-icons img:hover {
+    transform: scale(1.15);
+}
 /* SECTIONS */
 section{
     padding:80px 20px;
@@ -367,7 +394,25 @@ footer{
 
 <!-- FEATURES -->
 <section class="features">
-    <h2>Why Choose Us?</h2>
+    <div class="why-header">
+        <div class="food-icons left-icons">
+            <img src="IMAGES/chilli.jpg" alt="">
+            <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38" alt="">
+            <img src="IMAGES/naan.jpg" alt="">
+            <img src="IMAGES/pulow.webp" alt="">
+            <img src="IMAGES/gulab.webp" alt="">
+            
+        </div>
+        <h2>Why Choose Us?</h2>
+        <div class="food-icons right-icons">
+            <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c" alt="">
+            <img src="IMAGES/panipuri.jpg" alt="">
+            <img src="https://images.unsplash.com/photo-1512058564366-18510be2db19" alt="">
+            <img src="IMAGES/pasta.jpg" alt="">
+            <img src="IMAGES/BURGER.jpg" alt="">
+            
+        </div>
+    </div>
     <div class="feature-grid">
         <div class="feature-card">
             <h3>🍲 Fresh Ingredients</h3>
