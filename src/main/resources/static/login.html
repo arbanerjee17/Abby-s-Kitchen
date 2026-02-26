@@ -19,15 +19,15 @@ body {
     cursor:pointer;
     position:fixed;
     top:20px;
-    left:25px;
+    left:20px;
     z-index:1001;
 }
 
-/* Logout Button (Top Right) */
+/* Logout Button */
 .logout-btn {
     position:fixed;
     top:20px;
-    right:30px;
+    right:20px;
     padding:8px 18px;
     border:none;
     background:#ff4b7d;
@@ -76,40 +76,49 @@ body {
     cursor:pointer;
 }
 
-/* Login Container */
+/* Wrapper */
 .login-wrapper {
+    min-height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
-    height:100vh;
+    padding:100px 20px 40px 20px;
 }
 
+/* Card */
 .login-container {
     background:rgba(255,255,255,0.08);
     padding:40px;
     border-radius:20px;
-    width: 90%;
-    max-width: 600px;
+    width:100%;
+    max-width:500px;
     text-align:center;
     box-shadow:0 15px 40px rgba(0,0,0,0.5);
 }
 
 .login-container h2 {
-    margin-bottom:25px;
+    margin-bottom:20px;
 }
 
+.login-container a {
+    color:white;
+    font-size:14px;
+}
+
+/* Inputs */
 input {
-    width: 90%;
-    max-width: 600px;
-    padding:12px;
-    margin:10px 0;
-    border:none;
-    border-radius:10px;
-}
-
-.login-btn {
     width:100%;
     padding:12px;
+    margin:12px 0;
+    border:none;
+    border-radius:10px;
+    font-size:14px;
+}
+
+/* Button */
+.login-btn {
+    width:100%;
+    padding:14px;
     border:none;
     background:linear-gradient(to right,#ff416c,#ff4b2b);
     color:white;
@@ -117,10 +126,34 @@ input {
     font-size:16px;
     cursor:pointer;
     margin-top:15px;
+    transition:0.3s;
 }
 
 .login-btn:hover {
     transform:scale(1.05);
+}
+
+/* ✅ MOBILE FIX */
+@media (max-width: 768px) {
+
+    .login-wrapper {
+        padding:90px 15px 30px 15px;
+        align-items:flex-start;
+    }
+
+    .login-container {
+        padding:25px;
+    }
+
+    .logout-btn {
+        right:15px;
+        padding:6px 14px;
+        font-size:12px;
+    }
+
+    .menu-btn {
+        left:15px;
+    }
 }
 </style>
 </head>
@@ -134,7 +167,6 @@ input {
 <button class="logout-btn" id="logoutBtn" onclick="logoutUser()">
     🚪 Logout
 </button>
-
 
 <!-- Sidebar -->
 <div id="mySidenav" class="sidenav">
@@ -150,7 +182,7 @@ input {
 <div class="login-wrapper">
     <div class="login-container">
         <h2>Login</h2>
-        <a href="register.html" style="color:white">Register</a>
+        <a href="register.html">Register</a>
 
         <input type="email" id="email" placeholder="Enter Email">
         <input type="password" id="password" placeholder="Enter Password">
@@ -163,10 +195,6 @@ input {
 
 <script>
 
-//////////////////////////
-// SIDEBAR
-//////////////////////////
-
 function openNav() {
     document.getElementById("mySidenav").style.width = "250px";
 }
@@ -175,10 +203,6 @@ function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
 }
 
-//////////////////////////
-// LOGIN
-//////////////////////////
-
 function loginUser() {
 
     const email = document.getElementById("email").value;
@@ -186,13 +210,8 @@ function loginUser() {
 
     fetch("/customer/login", {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            email: email,
-            password: password
-        })
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password })
     })
     .then(response => {
         if(response.ok) {
@@ -221,27 +240,13 @@ function loginUser() {
     });
 }
 
-//////////////////////////
-// LOGOUT
-//////////////////////////
-
 function logoutUser() {
 
-    localStorage.removeItem("isLoggedIn");
-    localStorage.removeItem("userEmail");
-    localStorage.removeItem("redirectAfterLogin");
-    localStorage.removeItem("cart");
-    localStorage.removeItem("orders");
-    localStorage.removeItem("reviews");
+    localStorage.clear();
 
     alert("Logged out successfully!");
-
     window.location.href = "index.html";
 }
-
-//////////////////////////
-// HIDE LOGOUT IF NOT LOGGED IN
-//////////////////////////
 
 window.onload = function() {
 

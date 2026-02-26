@@ -4,70 +4,146 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <title>Register</title>
+
     <style>
-        body { font-family: Arial; text-align: center; margin-top: 100px; }
-        input { padding: 10px; margin: 10px; width: 90%;
-    max-width: 600px;; }
-        button { padding: 10px 20px; cursor: pointer; }
-        body{
-            background: linear-gradient(to right, #667eea, #764ba2);
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
             font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #667eea, #764ba2);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
             color: white;
         }
+
+        .container {
+            background: white;
+            color: black;
+            width: 100%;
+            max-width: 400px;
+            padding: 30px 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 25px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: #667eea;
+            color: white;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #5a67d8;
+        }
+
+        #message {
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
         /* Hamburger Button */
-        
-.menu-btn {
-    font-size: 28px;
-    cursor: pointer;
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    z-index: 1001;
-    color: white ; 
-}
+        .menu-btn {
+            font-size: 28px;
+            cursor: pointer;
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 1001;
+            color: white;
+        }
 
-/* Side Navigation */
-.sidenav {
-    height: 100%;
-    width: 0;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: #111;
-    overflow-x: hidden;
-    transition: 0.4s;
-    padding-top: 60px;
-    z-index: 1000;
-}
+        /* Side Navigation */
+        .sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.3s ease;
+            padding-top: 60px;
+            z-index: 1000;
+        }
 
-.sidenav a {
-    padding: 15px 25px;
-    text-decoration: none;
-    font-size: 18px;
-    color: white;
-    display: block;
-    transition: 0.3s;
-}
+        .sidenav a {
+            padding: 15px 25px;
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            display: block;
+            transition: 0.3s;
+        }
 
-.sidenav a:hover {
-    background-color: #ff4b7d;
-}
+        .sidenav a:hover {
+            background-color: #ff4b7d;
+        }
 
-.sidenav .close-btn {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    font-size: 30px;
-    cursor: pointer;
-}
+        .sidenav .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 30px;
+            cursor: pointer;
+            color: white;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 480px) {
+            .container {
+                padding: 25px 20px;
+            }
+
+            h2 {
+                font-size: 20px;
+            }
+
+            input {
+                font-size: 13px;
+            }
+
+            button {
+                font-size: 14px;
+            }
+        }
 
     </style>
 </head>
+
 <body>
-<!-- Hamburger -->
+
 <span class="menu-btn" onclick="openNav()">☰</span>
 
-<!-- Sidebar -->
 <div id="mySidenav" class="sidenav">
     <span class="close-btn" onclick="closeNav()">&times;</span>
     <a href="index.html">🏠 Home</a>
@@ -76,15 +152,18 @@
     <a href="orders.html">📦 Order History</a>
     <a href="reviews.html">⭐ Reviews</a>
 </div>
-<h2>Register</h2>
 
-<input type="text" id="name" placeholder="Name"><br>
-<input type="email" id="email" placeholder="Email"><br>
-<input type="password" id="password" placeholder="Password"><br>
+<div class="container">
+    <h2>Register</h2>
 
-<button onclick="register()">Register</button>
+    <input type="text" id="name" placeholder="Name">
+    <input type="email" id="email" placeholder="Email">
+    <input type="password" id="password" placeholder="Password">
 
-<p id="message"></p>
+    <button onclick="register()">Register</button>
+
+    <p id="message"></p>
+</div>
 
 <script>
 function register() {
@@ -102,8 +181,12 @@ function register() {
     .then(response => response.text())
     .then(data => {
         document.getElementById("message").innerText = data;
+    })
+    .catch(err => {
+        document.getElementById("message").innerText = "Registration failed!";
     });
 }
+
 function openNav() {
     document.getElementById("mySidenav").style.width = "250px";
 }
@@ -111,8 +194,6 @@ function openNav() {
 function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
 }
-
-
 </script>
 
 </body>

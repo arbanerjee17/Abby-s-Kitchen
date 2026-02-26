@@ -4,13 +4,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="UTF-8">
 <title>Abby's Kitchen</title>
+
 <style>
 body {
     margin:0;
     font-family:'Segoe UI',sans-serif;
     background: linear-gradient(to right,#ff416c,#ff4b2b);
     color:white;
-    overflow:hidden;
 }
 
 /* Hamburger Button */
@@ -44,7 +44,6 @@ body {
     font-size: 18px;
     color: white;
     display: block;
-    transition: 0.3s;
 }
 
 .sidenav a:hover {
@@ -59,33 +58,50 @@ body {
     cursor: pointer;
 }
 
+/* Navbar */
 .navbar {
-    padding:20px 40px;
+    padding:20px 60px;
     display:flex;
     justify-content:space-between;
     align-items:center;
+    flex-wrap: wrap;
+}
+
+.navbar h2 {
+    margin:0;
+}
+
+.navbar div {
+    display:flex;
+    gap:20px;
 }
 
 .navbar a {
     color:white;
     text-decoration:none;
-    margin-left:20px;
     font-weight:bold;
 }
 
+/* Hero Section */
 .hero {
-    height:80vh;
+    min-height:80vh;
     display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
     text-align:center;
+    padding:40px 20px;
     animation: fadeIn 1.5s ease;
 }
 
 .hero h1 {
     font-size:60px;
     margin:0;
+}
+
+.hero h2 {
+    margin-top:15px;
+    font-weight:400;
 }
 
 .hero p {
@@ -108,18 +124,58 @@ body {
     transform:scale(1.1);
 }
 
+/* Animation */
 @keyframes fadeIn {
     from {opacity:0; transform:translateY(20px);}
     to {opacity:1; transform:translateY(0);}
 }
+
+/* ✅ MOBILE FIX */
+@media (max-width: 768px) {
+
+    .navbar {
+        padding:20px;
+        flex-direction: column;
+        gap:10px;
+        align-items: flex-start;
+    }
+
+    .navbar div {
+        width:100%;
+        justify-content: space-between;
+    }
+
+    .hero {
+        min-height:70vh;
+        padding-top:100px;
+    }
+
+    .hero h1 {
+        font-size:34px;
+    }
+
+    .hero h2 {
+        font-size:18px;
+    }
+
+    .hero p {
+        font-size:16px;
+    }
+
+    .hero button {
+        width:100%;
+        max-width:300px;
+    }
+}
 </style>
 </head>
+
 <body>
+
 <span class="menu-btn" onclick="openNav()">☰</span>
 
 <div id="mySidenav" class="sidenav">
     <span class="close-btn" onclick="closeNav()">&times;</span>
-
     <a href="index.html">🏠 Home</a>
     <a href="login.html">🔐 Login / Register</a>
     <a href="menu.html">🍽 Menu</a>
@@ -137,14 +193,16 @@ body {
 
 <div class="hero">
     <h1>
-    Welcome to <span style="color:#000000;">Abby's Kitchen</span>
+        Welcome to <span style="color:#000000;">Abby's Kitchen</span>
     </h1>
     <h2>Delicious Food Delivered</h2>
     <p>Fresh • Tasty • Fast</p>
-    <button onclick="window.location.href='menu.html'">Explore Menu</button>
+    <button onclick="window.location.href='menu.html'">
+        Explore Menu
+    </button>
 </div>
-<script>
 
+<script>
 function openNav() {
     document.getElementById("mySidenav").style.width = "250px";
 }
@@ -152,9 +210,7 @@ function openNav() {
 function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
 }
-
 </script>
 
 </body>
-
 </html>

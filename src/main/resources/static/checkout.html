@@ -1,28 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="UTF-8">
-    <title>Checkout</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Checkout</title>
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(to right, #ff9966, #ff5e62);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #ff9966, #ff5e62);
+    margin: 0;
+    padding: 0;
+}
 
-        .checkout-card {
-            background: white;
-            width: 90%;
-            max-width: 600px;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0px 10px 25px rgba(0,0,0,0.2);
-        }
 /* Hamburger Button */
 .menu-btn {
     font-size: 28px;
@@ -54,7 +44,6 @@
     font-size: 18px;
     color: white;
     display: block;
-    transition: 0.3s;
 }
 
 .sidenav a:hover {
@@ -69,49 +58,104 @@
     cursor: pointer;
 }
 
-        h2 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+/* Page Wrapper */
+.page-wrapper {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 100px 20px 40px 20px;
+}
 
-        .bill-row {
-            display: flex;
-            justify-content: space-between;
-            margin: 10px 0;
-            font-size: 16px;
-        }
+/* Checkout Card */
+.checkout-card {
+    background: white;
+    width: 100%;
+    max-width: 600px;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0px 10px 25px rgba(0,0,0,0.2);
+}
 
-        .total {
-            font-size: 18px;
-            font-weight: bold;
-            border-top: 2px solid #ddd;
-            padding-top: 10px;
-            margin-top: 15px;
-        }
+h2 {
+    text-align: center;
+    margin-bottom: 25px;
+}
 
-        button {
-            width: 100%;
-            padding: 12px;
-            margin-top: 20px;
-            border: none;
-            border-radius: 8px;
-            background: #ff5e62;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-        }
+/* Bill Rows */
+.bill-row {
+    display: flex;
+    justify-content: space-between;
+    margin: 12px 0;
+    font-size: 16px;
+}
 
-        button:hover {
-            background: #ff3b3f;
-        }
-    </style>
+.total {
+    font-size: 18px;
+    font-weight: bold;
+    border-top: 2px solid #ddd;
+    padding-top: 12px;
+    margin-top: 15px;
+}
+
+/* Button */
+button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 25px;
+    border: none;
+    border-radius: 8px;
+    background: #ff5e62;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #ff3b3f;
+}
+
+/* Empty Cart */
+.empty {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+/* ✅ MOBILE FIX */
+@media (max-width: 768px) {
+
+    .page-wrapper {
+        padding: 90px 15px 30px 15px;
+        align-items: flex-start;
+    }
+
+    .checkout-card {
+        padding: 20px;
+    }
+
+    h2 {
+        font-size: 22px;
+    }
+
+    .bill-row {
+        font-size: 14px;
+    }
+
+    button {
+        padding: 12px;
+        font-size: 15px;
+    }
+}
+</style>
 </head>
+
 <body>
+
 <span class="menu-btn" onclick="openNav()">☰</span>
 
 <div id="mySidenav" class="sidenav">
     <span class="close-btn" onclick="closeNav()">&times;</span>
-
     <a href="index.html">🏠 Home</a>
     <a href="login.html">🔐 Login / Register</a>
     <a href="menu.html">🍽 Menu</a>
@@ -119,15 +163,20 @@
     <a href="reviews.html">⭐ Reviews</a>
 </div>
 
+<div class="page-wrapper">
 <div class="checkout-card">
-    <h2>Checkout 🧾</h2>
 
-    <div id="bill"></div>
+<h2>Checkout 🧾</h2>
 
-    <button onclick="placeOrder()">Place Order</button>
+<div id="bill"></div>
+
+<button onclick="placeOrder()">Place Order</button>
+
+</div>
 </div>
 
 <script>
+
 // Block direct access
 window.onload = function() {
 
@@ -139,8 +188,14 @@ window.onload = function() {
         window.location.href = "login.html";
     }
 }
+
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 let userEmail = localStorage.getItem("userEmail");
+
+if(cart.length === 0){
+    document.getElementById("bill").innerHTML =
+        `<div class="empty">Your cart is empty 😔</div>`;
+}
 
 if(!userEmail){
     alert("Please login first!");
@@ -156,6 +211,7 @@ let gst = subtotal * 0.18;
 let delivery = 40;
 let total = subtotal + gst + delivery;
 
+if(cart.length !== 0){
 document.getElementById("bill").innerHTML = `
     <div class="bill-row">
         <span>Subtotal</span>
@@ -174,6 +230,8 @@ document.getElementById("bill").innerHTML = `
         <span>₹${total.toFixed(2)}</span>
     </div>
 `;
+}
+
 function openNav() {
     document.getElementById("mySidenav").style.width = "250px";
 }
@@ -181,20 +239,21 @@ function openNav() {
 function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
 }
+
 function placeOrder(){
 
     fetch("https://abby-s-kitchen.onrender.com/orders/place", {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-        amount: subtotal,
-        gst: gst,
-        deliveryCharge: delivery,   // ✅ FIXED
-        totalAmount: total,
-        customerEmail: userEmail    // also use this (you already defined it)
-    })
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            amount: subtotal,
+            gst: gst,
+            deliveryCharge: delivery,
+            totalAmount: total,
+            customerEmail: userEmail
+        })
     })
     .then(res => res.json())
     .then(data => {

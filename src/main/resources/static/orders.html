@@ -6,31 +6,36 @@
     <title>My Orders</title>
 
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             font-family: Arial, sans-serif;
             background: linear-gradient(to right, #ff9966, #ff5e62);
             min-height: 100vh;
-            padding: 40px 0;
-            display: flex;
-            justify-content: center;
+            padding: 20px;
         }
 
         .container {
-            width: 90%;
+            width: 100%;
             max-width: 600px;
+            margin: auto;
         }
 
+        /* ☰ Menu Button */
         .menu-btn {
             font-size: 28px;
             cursor: pointer;
             position: fixed;
-            top: 20px;
-            left: 20px;
+            top: 15px;
+            left: 15px;
             z-index: 1001;
             color: white;
         }
 
+        /* Side Navigation */
         .sidenav {
             height: 100%;
             width: 0;
@@ -39,7 +44,7 @@
             left: 0;
             background-color: #111;
             overflow-x: hidden;
-            transition: 0.4s;
+            transition: 0.3s ease;
             padding-top: 60px;
             z-index: 1000;
         }
@@ -63,12 +68,14 @@
             right: 20px;
             font-size: 30px;
             cursor: pointer;
+            color: white;
         }
 
         h2 {
             text-align: center;
             color: white;
             margin-bottom: 30px;
+            margin-top: 40px;
         }
 
         .order-card {
@@ -83,6 +90,7 @@
             display: flex;
             justify-content: space-between;
             margin: 8px 0;
+            font-size: 15px;
         }
 
         .total {
@@ -103,18 +111,82 @@
 
         button {
             display: block;
-            margin: 20px auto 0 auto;
-            padding: 10px 20px;
+            margin: 25px auto 0 auto;
+            padding: 12px;
             border: none;
             border-radius: 8px;
             background: #ff5e62;
             color: white;
             cursor: pointer;
+            font-size: 15px;
+            width: 200px;
         }
 
         button:hover {
             background: #ff3b3f;
         }
+
+        /* ============================= */
+        /* 📱 MOBILE RESPONSIVE */
+        /* ============================= */
+        @media (max-width: 768px) {
+
+            body {
+                padding: 15px;
+            }
+
+            .container {
+                width: 100%;
+            }
+
+            h2 {
+                font-size: 20px;
+                margin-top: 50px;
+            }
+
+            .order-card {
+                padding: 15px;
+            }
+
+            .order-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
+                font-size: 14px;
+            }
+
+            .total {
+                font-size: 16px;
+            }
+
+            button {
+                width: 100%;
+                font-size: 16px;
+            }
+
+            .menu-btn {
+                font-size: 26px;
+                top: 10px;
+                left: 10px;
+            }
+        }
+
+        /* 📱 Extra Small Phones */
+        @media (max-width: 480px) {
+
+            h2 {
+                font-size: 18px;
+            }
+
+            .order-row {
+                font-size: 13px;
+            }
+
+            button {
+                font-size: 15px;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -145,7 +217,6 @@ if(!userEmail){
     window.location.href = "login.html";
 }
 
-// ✅ FIXED URL (added / before email)
 fetch(`https://abby-s-kitchen.onrender.com/orders/history/${userEmail}`)
 .then(res => {
     if(!res.ok){

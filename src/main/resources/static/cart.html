@@ -9,8 +9,10 @@
 body {
     font-family:'Segoe UI',sans-serif;
     background: linear-gradient(to right, #ff9966, #ff5e62);
-    padding:40px;
+    margin: 0;
+    padding: 0;
 }
+
 /* Hamburger Button */
 .menu-btn {
     font-size: 28px;
@@ -42,7 +44,6 @@ body {
     font-size: 18px;
     color: white;
     display: block;
-    transition: 0.3s;
 }
 
 .sidenav a:hover {
@@ -57,35 +58,120 @@ body {
     cursor: pointer;
 }
 
-h1 {
-    text-align:center;
+/* Main Container */
+.cart-container {
+    max-width: 900px;
+    margin: auto;
+    padding: 100px 20px 40px 20px;
 }
 
+h1 {
+    text-align:center;
+    color:white;
+    margin-bottom: 30px;
+}
+
+/* Cart Item */
 .item {
     background:white;
-    padding:15px;
+    padding:20px;
     margin:15px 0;
     display:flex;
     justify-content:space-between;
     align-items:center;
-    border-radius:8px;
+    border-radius:12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    flex-wrap: wrap;
 }
 
+.item span {
+    font-weight: 600;
+}
+
+.item div {
+    display:flex;
+    gap:10px;
+}
+
+/* Buttons */
 button {
-    padding:5px 10px;
+    padding:6px 12px;
     border:none;
-    background:red;
+    background:#ff4b7d;
     color:white;
     cursor:pointer;
+    border-radius:6px;
+}
+
+button:hover {
+    opacity:0.9;
+}
+
+/* Total */
+#total {
+    text-align:center;
+    color:white;
+    margin-top: 30px;
+    font-size: 22px;
+}
+
+/* Checkout Button */
+.checkout-btn {
+    display:block;
+    margin: 30px auto;
+    padding: 12px 30px;
+    font-size:16px;
+    background:#111;
+    border-radius:30px;
+}
+
+/* Empty message */
+.empty {
+    text-align:center;
+    color:white;
+    font-size:18px;
+    margin-top:40px;
+}
+
+/* ✅ MOBILE FIX */
+@media (max-width: 768px) {
+
+    .cart-container {
+        padding: 90px 15px 30px 15px;
+    }
+
+    h1 {
+        font-size: 26px;
+    }
+
+    .item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .item div {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    button {
+        flex: 1;
+    }
+
+    .checkout-btn {
+        width: 100%;
+    }
 }
 </style>
 </head>
+
 <body>
+
 <span class="menu-btn" onclick="openNav()">☰</span>
 
 <div id="mySidenav" class="sidenav">
     <span class="close-btn" onclick="closeNav()">&times;</span>
-
     <a href="index.html">🏠 Home</a>
     <a href="login.html">🔐 Login / Register</a>
     <a href="menu.html">🍽 Menu</a>
@@ -93,11 +179,19 @@ button {
     <a href="reviews.html">⭐ Reviews</a>
 </div>
 
+<div class="cart-container">
+
 <h1>Your Cart 🛒</h1>
 
 <div id="cart"></div>
 
 <h2 id="total"></h2>
+
+<button class="checkout-btn" onclick="proceedToCheckout()">
+    Proceed to Checkout
+</button>
+
+</div>
 
 <script>
 
@@ -129,7 +223,6 @@ function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
 }
 
-
 function proceedToCheckout() {
 
     const isLoggedIn = localStorage.getItem("isLoggedIn");
@@ -137,41 +230,40 @@ function proceedToCheckout() {
     if(isLoggedIn !== "true") {
 
         alert("Please login / register to place order.");
-
-        // Save redirect destination
         localStorage.setItem("redirectAfterLogin", "checkout.html");
-
         window.location.href = "login.html";
 
     } else {
         window.location.href = "checkout.html";
     }
 }
-cart.forEach((item,index) => {
 
-    total += item.price * item.quantity;
+/* Render Cart */
+if(cart.length === 0){
+    cartDiv.innerHTML = `<div class="empty">Your cart is empty 😔</div>`;
+} else {
 
-    cartDiv.innerHTML += `
-        <div class="item">
-            <span>
-                ${item.name} - ₹${item.price} × ${item.quantity}
-            </span>
-            <div>
-                <button onclick="decrease(${index})">-</button>
-                <button onclick="increase(${index})">+</button>
+    cart.forEach((item,index) => {
+
+        total += item.price * item.quantity;
+
+        cartDiv.innerHTML += `
+            <div class="item">
+                <span>
+                    ${item.name} - ₹${item.price} × ${item.quantity}
+                </span>
+                <div>
+                    <button onclick="decrease(${index})">-</button>
+                    <button onclick="increase(${index})">+</button>
+                </div>
             </div>
-        </div>
-    `;
-});
+        `;
+    });
 
-document.getElementById("total").innerText = "Total: ₹" + total;
+    document.getElementById("total").innerText = "Total: ₹" + total;
+}
 
 </script>
-<br><br>
-<button onclick="proceedToCheckout()">
-    Proceed to Checkout
-</button>
-
 
 </body>
 </html>
