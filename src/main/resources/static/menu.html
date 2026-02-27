@@ -110,6 +110,13 @@ h1 {
 .category-buttons a:hover{
     background:#ff2f65;
 }
+
+.section-title{
+    font-size:18px;
+    font-weight:600;
+    margin:40px 60px 20px 60px;
+    color:#ffffff;
+}
 /* Card */
 .card {
     background: #3c4659;
@@ -228,13 +235,9 @@ h1 {
     <a href="#nonveg-items">Non Veg Items</a>
     <a href="#desserts">Desserts</a>
 </div>
+<h2 class="section-title">🥗 Veg Starters</h2>
 <div id="veg-starters" class="menu-container">
-
-    <h2 style="text-align:center; margin-bottom:40px; font-size:32px;">
-        🥗 Veg Starters
-    </h2>
-
-    <!-- Paapri Chaat -->
+<!-- Paapri Chaat -->
     <div class="card">
         <img src="IMAGES/paaprii.jpg">
         <div class="card-body">
@@ -284,13 +287,9 @@ h1 {
 
 </div>
 
+<h2 class="section-title">🥗 Non Veg Starters</h2>
 <div id="nonveg-starters" class="menu-container">
-
-    <h2 style="text-align:center; margin-bottom:40px; font-size:32px;">
-        🍗 Non Veg Starters
-    </h2>
-
-    <!-- Double Chicken Burger -->
+<!-- Double Chicken Burger -->
     <div class="card">
         <img src="IMAGES/BURGER.jpg">
         <div class="card-body">
@@ -301,16 +300,34 @@ h1 {
             </button>
         </div>
     </div>
+    <div class="card">
+        <img src="IMAGES/kabab.jpg">
+        <div class="card-body">
+            <h3>🍔 Chicken Reshmi Kebab</h3>
+            <p class="price">₹169</p>
+            <button class="btn" onclick="addStaticItem('Chicken Reshmi Kebab',169)">
+                Add to Cart
+            </button>
+        </div>
+    </div>
+    <div class="card">
+        <img src="IMAGES/fishfry.webp">
+        <div class="card-body">
+            <h3>🍔 Fish Fry</h3>
+            <p class="price">₹69</p>
+            <button class="btn" onclick="addStaticItem('Fish Fry',69)">
+                Add to Cart
+            </button>
+        </div>
+    </div>
+
+
 
 </div>
 
+<h2 class="section-title">🥘 Veg Items</h2>
 <div id="veg-items" class="menu-container">
-
-    <h2 style="text-align:center; margin-bottom:40px; font-size:32px;">
-        🥘 Veg Items
-    </h2>
-
-    <!-- Cheese Pizza -->
+<!-- Cheese Pizza -->
     <div class="card">
         <img src="IMAGES/PIZZA2.jpg">
         <div class="card-body">
@@ -396,12 +413,8 @@ h1 {
 
 </div>
 
+<h2 class="section-title">🍖 Non Veg Items</h2>
 <div id="nonveg-items" class="menu-container">
-
-    <h2 style="text-align:center; margin-bottom:40px; font-size:32px;">
-        🍖 Non Veg Items
-    </h2>
-
     <!-- Chicken Tikka Butter Masala -->
     <div class="card">
         <img src="IMAGES/tikka.jpeg">
@@ -425,22 +438,48 @@ h1 {
             </button>
         </div>
     </div>
+    <div class="card">
+        <img src="IMAGES/bharta.jpg">
+        <div class="card-body">
+            <h3>🌶 Chicken Bharta</h3>
+            <p class="price">₹159</p>
+            <button class="btn" onclick="addStaticItem('Chicken Bharta',159)">
+                Add to Cart
+            </button>
+        </div>
+    </div>
 
 </div>
 
+<h2 class="section-title">🍨 Desserts</h2>
 <div id="desserts" class="menu-container">
-
-    <h2 style="text-align:center; margin-bottom:40px; font-size:32px;">
-        🍨 Desserts
-    </h2>
-
-    <!-- Gulaab Jamun -->
+<!-- Gulaab Jamun -->
     <div class="card">
         <img src="IMAGES/gulab.webp">
         <div class="card-body">
             <h3>🍮 Gulaab Jamun (2 Pieces)</h3>
             <p class="price">₹49</p>
             <button class="btn" onclick="addStaticItem('Gulaab Jamun',49)">
+                Add to Cart
+            </button>
+        </div>
+    </div>
+    <div class="card">
+        <img src="IMAGES/rosogolla.webp">
+        <div class="card-body">
+            <h3>🍮 Rasgulla (2 Pieces)</h3>
+            <p class="price">₹45</p>
+            <button class="btn" onclick="addStaticItem('Rasgulla',45)">
+                Add to Cart
+            </button>
+        </div>
+    </div>
+    <div class="card">
+        <img src="IMAGES/phirni.jpeg">
+        <div class="card-body">
+            <h3>🍮 Phirni</h3>
+            <p class="price">₹79</p>
+            <button class="btn" onclick="addStaticItem('Phirni',79)">
                 Add to Cart
             </button>
         </div>
